@@ -14,6 +14,7 @@ export class AddTodoComponent implements OnInit {
 
   title: string | undefined;
   desc: string | undefined;
+  val: boolean = false;
   constructor() { }
 
   ngOnInit(): void {
@@ -21,11 +22,19 @@ export class AddTodoComponent implements OnInit {
 
   onSubmit()
   {
+    if(this.title == undefined || this.desc == undefined || this.title == "" || this.desc == "")
+    {
+      this.val = true;
+    }
+    else{
+      this.val = false
       const todo = {
         title : this.title,
         desc : this.desc,
         active : true
       }
-      this.todoAdd.emit(todo)
+      this.todoAdd.emit(todo) 
+    }
   }
+
 }
