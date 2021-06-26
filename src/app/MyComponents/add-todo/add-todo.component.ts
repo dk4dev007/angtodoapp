@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Todo } from 'src/app/Todo';
 
@@ -12,14 +12,18 @@ export class AddTodoComponent implements OnInit {
   @Output()
   todoAdd : EventEmitter<Todo> = new EventEmitter();
 
-  title: string | undefined;
-  desc: string | undefined;
+  @Input() oldtodo: Todo = new Todo;
+
+  title: string | undefined
+  desc: string | undefined
   val: boolean = false;
-  constructor() { }
+  
+  constructor() { 
+  }
 
   ngOnInit(): void {
   }
-
+  
   onSubmit()
   {
     if(this.title == undefined || this.desc == undefined || this.title == "" || this.desc == "")
@@ -31,9 +35,11 @@ export class AddTodoComponent implements OnInit {
       const todo = {
         title : this.title,
         desc : this.desc,
-        active : true
+        active : true,
+        edit: this.oldtodo.edit ? true : false
       }
-      this.todoAdd.emit(todo) 
+      this.todoAdd.emit(todo)
+      this.oldtodo.edit = todo.edit 
       this.title = ""
       this.desc = ""
     }

@@ -1,18 +1,39 @@
 <div class="my-3">
     <h4>Add a Todo</h4>
-    <form (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit()" class="container">
         <div class="mb-3">
             <label for="title" class="form-label">Todo Title</label>
-            <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp"
+            <div *ngIf="oldtodo.edit === false">
+                <input type="text" class="form-control" id="title" name="title" 
                 [(ngModel)]="title">
+            </div>
+            <div *ngIf="oldtodo.edit === true">
+                <input type="text" class="form-control" id="title" name="title" [(ngModel)]="title"
+                [placeholder]="oldtodo.title">
+                <!-- <label class="my-2">Old Title : {{oldtodo.title}}</label> -->
+            </div>
         </div>
         <div class="mb-3">
             <label for="desc" class="form-label">Todo Description</label>
-            <input type="text" class="form-control" id="desc" name="desc" [(ngModel)]="desc">
+            <div *ngIf="oldtodo.edit === false">
+                <input type="text" class="form-control" id="desc" name="desc" [(ngModel)]="desc">
+            </div>
+            <div *ngIf="oldtodo.edit === true">
+                <input type="text" class="form-control" id="desc" name="desc" [(ngModel)]="desc"
+                [placeholder]="oldtodo.desc">
+                <!-- <label class="my-2">Old Description : {{oldtodo.desc}}</label> -->
+            </div>
         </div>
         <div class="mb-3" *ngIf="val">
             <div class="alert alert-danger" role="alert">Please fill both the details!!</div>
         </div>
-        <button type="submit" class="btn btn-primary">Add Todo</button>
+        <div *ngIf="oldtodo.edit === false">
+            <button type="submit"  class="btn btn-primary">Add Todo</button>
+        </div>
+        <div *ngIf="oldtodo.edit === true">
+            <button type="submit"  class="btn btn-warning">Edit Todo</button>
+        </div>
+        
+        
     </form>
 </div>

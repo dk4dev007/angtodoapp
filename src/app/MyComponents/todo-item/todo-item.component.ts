@@ -14,6 +14,7 @@ export class TodoItemComponent implements OnInit {
 
   @Output() todoDelete : EventEmitter<Todo> = new EventEmitter();
   @Output() todoCheck : EventEmitter<Todo> = new EventEmitter();
+  @Output() todoEdit : EventEmitter<Todo> = new EventEmitter();
 
   constructor() { }
 
@@ -29,5 +30,11 @@ export class TodoItemComponent implements OnInit {
   onCheck(todo : Todo)
   {
     this.todoCheck.emit(todo)
+  }
+
+  onEdit(todo : Todo)
+  {
+    this.todoEdit.emit(todo)
+    console.log("on edit hase been triggerrd by child with  " + todo.title)
   }
 }

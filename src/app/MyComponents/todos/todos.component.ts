@@ -7,6 +7,12 @@ import { Todo } from '../../Todo'
 })
 export class TodosComponent implements OnInit {
   todos: Todo[] = [];
+  oldtodo: Todo = {
+    title:"",
+    desc:"",
+    active:true,
+    edit:false
+  }; 
   item: any = localStorage.getItem("todos");
   constructor() {
     if(localStorage.getItem("todos") == null)
@@ -28,10 +34,33 @@ export class TodosComponent implements OnInit {
       localStorage.setItem("todos",JSON.stringify(this.todos))
   }
 
+  editTodo(todo : Todo)
+  {
+      const index = this.todos.indexOf(todo)
+      this.todos[index].edit=true
+      localStorage.setItem("todos",JSON.stringify(this.todos))
+      todo.edit=true
+      this.oldtodo=todo
+      console.log("This is reached to parent  "+this.oldtodo.title)
+      // const index = this.todos.indexOf(this.oldtodo)
+      // this.todos[index]=todo;
+      // todo.edit = false;
+      // localStorage.setItem("todos",JSON.stringify(this.todos))  
+  }
+
   addTodo(todo: Todo)
   {
-    this.todos.push(todo)
-    localStorage.setItem("todos",JSON.stringify(this.todos))
+    if(todo.edit)
+    { 
+      const index = this.todos.indexOf(this.oldtodo)
+      this.todos[index]=todo;
+      this.todos[index].edit = false;
+      localStorage.setItem("todos",JSON.stringify(this.todos))  
+    }
+    else{
+      this.todos.push(todo)
+      localStorage.setItem("todos",JSON.stringify(this.todos))     
+    }
   }
 
   toggleTodo(todo : Todo)
