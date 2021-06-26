@@ -4,12 +4,11 @@
         <div class="mb-3">
             <label for="title" class="form-label">Todo Title</label>
             <div *ngIf="oldtodo.edit === false">
-                <input type="text" class="form-control" id="title" name="title" 
-                [(ngModel)]="title">
+                <input type="text" class="form-control" id="title" name="title" [(ngModel)]="title">
             </div>
             <div *ngIf="oldtodo.edit === true">
                 <input type="text" class="form-control" id="title" name="title" [(ngModel)]="title"
-                [placeholder]="oldtodo.title">
+                    [placeholder]="oldtodo.title">
                 <!-- <label class="my-2">Old Title : {{oldtodo.title}}</label> -->
             </div>
         </div>
@@ -20,7 +19,7 @@
             </div>
             <div *ngIf="oldtodo.edit === true">
                 <input type="text" class="form-control" id="desc" name="desc" [(ngModel)]="desc"
-                [placeholder]="oldtodo.desc">
+                    [placeholder]="oldtodo.desc">
                 <!-- <label class="my-2">Old Description : {{oldtodo.desc}}</label> -->
             </div>
         </div>
@@ -28,12 +27,10 @@
             <div class="alert alert-danger" role="alert">Please fill both the details!!</div>
         </div>
         <div *ngIf="oldtodo.edit === false">
-            <button type="submit"  class="btn btn-primary">Add Todo</button>
+            <button type="submit" class="btn btn-primary">Add Todo</button>
         </div>
         <div *ngIf="oldtodo.edit === true">
-            <button type="submit"  class="btn btn-warning">Edit Todo</button>
+            <button type="submit" class="btn btn-warning">Edit Todo</button>
         </div>
-        
-        
     </form>
 </div>
